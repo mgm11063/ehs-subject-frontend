@@ -116,7 +116,7 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
               variant="g_examination"
               maxW={"52"}
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled hidden>
                 일반검진 실시 여부
               </option>
               <option value="다른병원에서 일반검진">
@@ -133,7 +133,7 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
               variant="s_examination"
               maxW={"52"}
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled hidden>
                 특수검진 실시 여부
               </option>
               <option value="고대에서 특수검진">고대에서 특수검진</option>
