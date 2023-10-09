@@ -2,6 +2,9 @@ import Cookie from "js-cookie";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { formatDate } from "./lib/utils";
+import { FactorOption } from "./types";
+
+
 
 const instance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/v1/",
@@ -24,6 +27,10 @@ export const getCompanyStaffs = ({ queryKey }: QueryFunctionContext) => {
     .get(`companies/${companyPk}/staffs`)
     .then((response) => response.data);
 };
+
+export const getFactorsOptions = () =>
+  instance.get("factors/").then((response) => response.data);
+
 
 export const getMe = () =>
   instance.get(`users/me`).then((response) => response.data);

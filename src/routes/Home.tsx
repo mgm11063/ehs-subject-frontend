@@ -1,6 +1,5 @@
-import { Grid, useEditable } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { getCompanies } from "../api";
 import Company from "../components/Company";
 import CompanySkeleton from "../components/CompanySkeleton";

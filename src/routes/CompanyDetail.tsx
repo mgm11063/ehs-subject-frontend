@@ -24,7 +24,7 @@ export default function CompanyDetail() {
     getCompany
   );
 
-  console.log();
+  console.log(companyPk);
 
   return (
     <>
@@ -71,12 +71,11 @@ export default function CompanyDetail() {
                     <Td>{staff.s_examination}</Td>
                     <Td>
                       {staff.factors.map((factor) => {
-                        return factor.name + ",";
+                        return factor.value + ",";
                       })}
                     </Td>
                     <Td>{staff.is_night ? "O" : "X"}</Td>
                     <Td>{staff.join_date}</Td>
-                    <Td>{staff.examination_date}</Td>
                   </Tr>
                 );
               })}

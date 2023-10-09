@@ -17,15 +17,17 @@ export interface ICompanyStaff {
   join_date: string;
   examination_date: string;
   is_night: boolean;
-  is_complete: boolean;
   seg_type: ISegType;
   factors: IFactor[];
 }
+interface FactorOption {
+  value: string;
+  label: string;
+}
 
 export interface IFactor {
-  pk: number;
-  name: string;
-  check_cycle: number;
+  value: number;
+  label: string;
 }
 
 export interface ISegType {

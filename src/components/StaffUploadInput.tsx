@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  useForm,
   SubmitHandler,
   useFieldArray,
   Control,
@@ -22,6 +21,8 @@ import {
   Text,
   HStack,
 } from "@chakra-ui/react";
+import Factors from "./Factors";
+import { FactorOption } from "../types";
 
 export interface FormData {
   dynamicFields: {
@@ -30,10 +31,9 @@ export interface FormData {
     seg_type: string;
     g_examination: string;
     s_examination: string;
-    factors: string;
+    factors: [FactorOption];
     is_night: boolean;
     join_date: string;
-    examination_date: string;
   }[];
 }
 
@@ -42,6 +42,7 @@ interface DynamicFieldsProps {
   onSubmit: SubmitHandler<FormData>;
   handleSubmit: any;
   register: any;
+  setValue: any;
 }
 
 const DynamicFields: React.FC<DynamicFieldsProps> = ({
@@ -49,6 +50,7 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
   onSubmit,
   handleSubmit,
   register,
+  setValue,
 }) => {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -56,11 +58,12 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
   });
 
   return (
-    <FormControl onSubmit={handleSubmit(onSubmit)} className="hi">
+    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <HStack
         pb={"1rem"}
         display="flex"
-        justifyContent="space-start"
+        justifyContent="space-between"
         fontWeight={"bold"}
       >
         <Text fontSize="xl" pr={"36"}>
@@ -87,7 +90,6 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
         <Text fontSize="xl" pr={"6.2rem"}>
           입사일
         </Text>
-        <Text fontSize="xl">차기 검진일</Text>
       </HStack>
       <VStack spacing={4} align="stretch">
         {fields.map((field, index) => (
@@ -144,21 +146,14 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
               placeholder={`공정명(SEG)`}
               maxW={"56"}
             />
-            <Input
-              {...register(`dynamicFields[${index}].factors`)}
-              placeholder={`유해인자`}
-              maxW={"64"}
-            />
+
+      
+            <Factors register={register} index={index} setValue={setValue} control={control} />
+            
             <Input
               {...register(`dynamicFields[${index}].join_date`)}
               type="date"
               placeholder={`입사일`}
-              maxW={"36"}
-            />
-            <Input
-              {...register(`dynamicFields[${index}].examination_date`)}
-              type="date"
-              placeholder={`차기 검진일`}
               maxW={"36"}
             />
             <Button
@@ -181,9 +176,8 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
               g_examination: "",
               s_examination: "",
               seg_type: "",
-              factors: "",
+              factors: [{"label":"", "value":""}],
               join_date: "",
-              examination_date: "",
             })
           }
         >
@@ -191,10 +185,10 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
         </Button>
         <Button type="submit">Submit</Button>
       </VStack>
-    </FormControl>
+      </form>
+      </>
   );
 };
 
 export default DynamicFields;
 
-//
