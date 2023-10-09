@@ -30,7 +30,7 @@ export default function CompanyDetail() {
     <>
       <VStack>
         <Button colorScheme="teal" variant="outline">
-          <Link color="teal" href="#">
+          <Link color="teal" href="http://localhost:3000/companies/1/upload">
             직원 명단 추가
           </Link>
         </Button>
@@ -49,14 +49,13 @@ export default function CompanyDetail() {
               <Tr>
                 <Th>성명</Th>
                 <Th>사무직 구분</Th>
-                <Th>SEG</Th>
+                <Th>야간근무</Th>
                 <Th>일반검진 실시 여부</Th>
                 <Th>특수검진 실시 여부</Th>
+                <Th>SEG</Th>
                 <Th>유해인자</Th>
-                <Th>야간근무</Th>
                 <Th>23년 검진 실시일</Th>
                 <Th>차기 검진일</Th>
-                <Th>입사일</Th>
               </Tr>
             </Thead>
 
@@ -66,15 +65,15 @@ export default function CompanyDetail() {
                   <Tr>
                     <Td>{staff.name}</Td>
                     <Td>{staff.is_office ? "O" : "X"}</Td>
-                    <Td>{staff.seg_type.name}</Td>
+                    <Td>{staff.is_night ? "O" : "X"}</Td>
                     <Td>{staff.g_examination}</Td>
                     <Td>{staff.s_examination}</Td>
+                    <Td>{staff.seg_type.name}</Td>
                     <Td>
                       {staff.factors.map((factor) => {
                         return factor.value + ",";
                       })}
                     </Td>
-                    <Td>{staff.is_night ? "O" : "X"}</Td>
                     <Td>{staff.join_date}</Td>
                   </Tr>
                 );
