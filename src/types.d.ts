@@ -15,10 +15,9 @@ export interface ICompanyStaff {
   g_examination: string;
   s_examination: string;
   join_date: string;
-  examination_date: string;
+  pre_examination_date: string;
   is_night: boolean;
-  seg_type: ISegType;
-  factors: IFactor[];
+  segs: ISegType;
 }
 interface FactorOption {
   value: string;
@@ -28,10 +27,12 @@ interface FactorOption {
 export interface IFactor {
   value: number;
   label: string;
+  check_cycle: number;
+  regular_check_cycle: number;
 }
 
 export interface ISegType {
   pk: number;
   name: string;
-  kind: string;
+  factors: IFactor[];
 }

@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  SubmitHandler,
-  useFieldArray,
-  Control,
-} from "react-hook-form";
+import { SubmitHandler, useFieldArray, Control } from "react-hook-form";
 import {
   Box,
   Button,
@@ -59,136 +55,139 @@ const DynamicFields: React.FC<DynamicFieldsProps> = ({
 
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <HStack
-        pb={"1rem"}
-        display="flex"
-        justifyContent="space-between"
-        fontWeight={"bold"}
-      >
-        <Text fontSize="xl" pr={"36"}>
-          이름
-        </Text>
-        <Text fontSize="xl" pr={"1.8rem"}>
-          사무직
-        </Text>
-        <Text fontSize="xl" pr={"1.2rem"}>
-          야간 근무자
-        </Text>
-        <Text fontSize="xl" pr={"3.2rem"}>
-          일반검진 실시 여부
-        </Text>
-        <Text fontSize="xl" pr={"3rem"}>
-          특수검진 실시 여부
-        </Text>
-        <Text fontSize="xl" pr={"8rem"}>
-          공정명(SEG)
-        </Text>
-        <Text fontSize="xl" pr={"12rem"}>
-          유해인자
-        </Text>
-        <Text fontSize="xl" pr={"6.2rem"}>
-          입사일
-        </Text>
-      </HStack>
-      <VStack spacing={4} align="stretch">
-        {fields.map((field, index) => (
-          <Box key={field.id} display="flex" justifyContent="space-between">
-            <Input
-              {...register(`dynamicFields[${index}].name`)}
-              placeholder={`이름`}
-              maxW={"44"}
-            />
-            <Checkbox
-              {...register(`dynamicFields[${index}].is_office`)}
-              type="checkbox"
-              maxW={"28"}
-            >
-              사무직
-            </Checkbox>
-            <Checkbox
-              {...register(`dynamicFields[${index}].is_night`)}
-              type="checkbox"
-              maxW={"28"}
-            >
-              야간 근무자
-            </Checkbox>
-            <Select
-              {...register(`dynamicFields[${index}].g_examination`)}
-              variant="g_examination"
-              maxW={"52"}
-            >
-              <option value="" disabled hidden>
-                일반검진 실시 여부
-              </option>
-              <option value="다른병원에서 일반검진">
-                다른병원에서 일반검진
-              </option>
-              <option value="고대에서 일반검진">고대에서 일반검진</option>
-              <option value="다른병원에서 일반검진">
-                다른병원에서 일반검진
-              </option>
-              <option value="센트럴에서 일반검진">센트럴에서 일반검진</option>
-            </Select>
-            <Select
-              {...register(`dynamicFields[${index}].s_examination`)}
-              variant="s_examination"
-              maxW={"52"}
-            >
-              <option value="" disabled hidden>
-                특수검진 실시 여부
-              </option>
-              <option value="고대에서 특수검진">고대에서 특수검진</option>
-              <option value="센트럴에서 특수검진">센트럴에서 특수검진</option>
-            </Select>
-            <Input
-              {...register(`dynamicFields[${index}].seg_type`)}
-              placeholder={`공정명(SEG)`}
-              maxW={"56"}
-            />
-
-      
-            <Factors register={register} index={index} setValue={setValue} control={control} />
-            
-            <Input
-              {...register(`dynamicFields[${index}].join_date`)}
-              type="date"
-              placeholder={`입사일`}
-              maxW={"36"}
-            />
-            <Button
-              bg={"red.400"}
-              type="button"
-              onClick={() => remove(index)}
-              ml={4}
-            >
-              삭제
-            </Button>
-          </Box>
-        ))}
-        <Button
-          type="button"
-          onClick={() =>
-            append({
-              name: "",
-              is_office: false,
-              is_night: false,
-              g_examination: "",
-              s_examination: "",
-              seg_type: "",
-              factors: [{"label":"", "value":""}],
-              join_date: "",
-            })
-          }
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <HStack
+          pb={"1rem"}
+          display="flex"
+          justifyContent="space-between"
+          fontWeight={"bold"}
         >
-          Add Field
-        </Button>
-        <Button type="submit">Submit</Button>
-      </VStack>
+          <Text fontSize="xl" pr={"36"}>
+            이름
+          </Text>
+          <Text fontSize="xl" pr={"1.8rem"}>
+            사무직
+          </Text>
+          <Text fontSize="xl" pr={"1.2rem"}>
+            야간 근무자
+          </Text>
+          <Text fontSize="xl" pr={"3.2rem"}>
+            일반검진 실시 여부
+          </Text>
+          <Text fontSize="xl" pr={"3rem"}>
+            특수검진 실시 여부
+          </Text>
+          <Text fontSize="xl" pr={"8rem"}>
+            공정명(SEG)
+          </Text>
+          <Text fontSize="xl" pr={"12rem"}>
+            유해인자
+          </Text>
+          <Text fontSize="xl" pr={"6.2rem"}>
+            입사일
+          </Text>
+        </HStack>
+        <VStack spacing={4} align="stretch">
+          {fields.map((field, index) => (
+            <Box key={field.id} display="flex" justifyContent="space-between">
+              <Input
+                {...register(`dynamicFields[${index}].name`)}
+                placeholder={`이름`}
+                maxW={"44"}
+              />
+              <Checkbox
+                {...register(`dynamicFields[${index}].is_office`)}
+                type="checkbox"
+                maxW={"28"}
+              >
+                사무직
+              </Checkbox>
+              <Checkbox
+                {...register(`dynamicFields[${index}].is_night`)}
+                type="checkbox"
+                maxW={"28"}
+              >
+                야간 근무자
+              </Checkbox>
+              <Select
+                {...register(`dynamicFields[${index}].g_examination`)}
+                variant="g_examination"
+                maxW={"52"}
+              >
+                <option value="" disabled hidden>
+                  일반검진 실시 여부
+                </option>
+                <option value="다른병원에서 일반검진">
+                  다른병원에서 일반검진
+                </option>
+                <option value="고대에서 일반검진">고대에서 일반검진</option>
+                <option value="다른병원에서 일반검진">
+                  다른병원에서 일반검진
+                </option>
+                <option value="1">센트럴에서 일반검진</option>
+              </Select>
+              <Select
+                {...register(`dynamicFields[${index}].s_examination`)}
+                variant="s_examination"
+                maxW={"52"}
+              >
+                <option value="" disabled hidden>
+                  특수검진 실시 여부
+                </option>
+                <option value="고대에서 특수검진">고대에서 특수검진</option>
+                <option value="센트럴에서 특수검진">센트럴에서 특수검진</option>
+              </Select>
+              <Input
+                {...register(`dynamicFields[${index}].seg_type`)}
+                placeholder={`공정명(SEG)`}
+                maxW={"56"}
+              />
+
+              <Factors
+                register={register}
+                index={index}
+                setValue={setValue}
+                control={control}
+              />
+
+              <Input
+                {...register(`dynamicFields[${index}].join_date`)}
+                type="date"
+                placeholder={`입사일`}
+                maxW={"36"}
+              />
+              <Button
+                bg={"red.400"}
+                type="button"
+                onClick={() => remove(index)}
+                ml={4}
+              >
+                삭제
+              </Button>
+            </Box>
+          ))}
+          <Button
+            type="button"
+            onClick={() =>
+              append({
+                name: "",
+                is_office: false,
+                is_night: false,
+                g_examination: "",
+                s_examination: "",
+                seg_type: "",
+                factors: [{ label: "", value: "" }],
+                join_date: "",
+              })
+            }
+          >
+            Add Field
+          </Button>
+          <Button type="submit">Submit</Button>
+        </VStack>
       </form>
-      </>
+    </>
   );
 };
 
 export default DynamicFields;
-

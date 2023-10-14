@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
 import "../calendar.css";
 import { getCompany } from "../api";
-import { ICompany } from "../types";
+import { ICompany, ICompanyStaff, IFactor } from "../types";
 import {
   Table,
   Thead,
@@ -16,6 +16,7 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
+import Seg from "../components/Seg";
 
 export default function CompanyDetail() {
   const { companyPk } = useParams();
@@ -23,8 +24,6 @@ export default function CompanyDetail() {
     [`companies`, companyPk],
     getCompany
   );
-
-  console.log(companyPk);
 
   return (
     <>
@@ -53,14 +52,16 @@ export default function CompanyDetail() {
                 <Th>일반검진 실시 여부</Th>
                 <Th>특수검진 실시 여부</Th>
                 <Th>SEG</Th>
-                <Th>유해인자</Th>
-                <Th>23년 검진 실시일</Th>
-                <Th>차기 검진일</Th>
+                <Th>유해물질</Th>
+                <Th>입사&배치일</Th>
+                <Th>배치전 검진 예정일</Th>
+                <Th>배치후&직전 검진 예정일</Th>
+                <Th>정기 검진 예정일</Th>
+                <Th>비고</Th>
               </Tr>
             </Thead>
-
             <Tbody>
-              {data?.staffs.map((staff) => {
+              {data?.staffs.map((staff: ICompanyStaff) => {
                 return (
                   <Tr>
                     <Td>{staff.name}</Td>
@@ -68,13 +69,13 @@ export default function CompanyDetail() {
                     <Td>{staff.is_night ? "O" : "X"}</Td>
                     <Td>{staff.g_examination}</Td>
                     <Td>{staff.s_examination}</Td>
-                    <Td>{staff.seg_type.name}</Td>
-                    <Td>
-                      {staff.factors.map((factor) => {
-                        return factor.value + ",";
-                      })}
-                    </Td>
-                    <Td>{staff.join_date}</Td>
+                    <Td>{staff.segs.name}</Td>
+                    <Seg
+                      pre_examination_date={staff.pre_examination_date}
+                      is_night={staff.is_night}
+                      join_date={staff.join_date}
+                      staff={staff.segs}
+                    />
                   </Tr>
                 );
               })}
