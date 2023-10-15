@@ -19,6 +19,7 @@ import DynamicFields, { FormData } from "../components/StaffUploadInput";
 import StaffNotificatInput from "../components/StaffNotificatInput";
 import PreDate from "../components/PreDate";
 import { format, startOfDay } from "date-fns";
+import axios from "axios";
 
 export interface StaffFormData {
   dynamicFields: {
@@ -33,6 +34,10 @@ export interface StaffFormData {
     pre_examination_date: string;
   }[];
 }
+interface Data {
+  pk: string;
+  pre_examination_date: string;
+}
 
 export default function StaffNotificat() {
   const { companyPk } = useParams();
@@ -42,8 +47,20 @@ export default function StaffNotificat() {
   );
 
   const { handleSubmit, register } = useForm<StaffFormData>();
-  const onSubmit: SubmitHandler<StaffFormData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<StaffFormData> = async (data) => {
+    const Rdata = data["dynamicFields"].slice(1);
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/v1/companies/1/staffs`,
+        Rdata
+      );
+      console.log("Data updated successfully:", response.data);
+      window.location.href = "/";
+      return response.data;
+    } catch (error) {
+      console.error("Error updating data:", error);
+      throw error;
+    }
   };
   var currentDate = new Date();
   var currentYear = currentDate.getFullYear();
