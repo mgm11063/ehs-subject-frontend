@@ -26,22 +26,20 @@ export default function Company({ pk, name, user }: ICompanyProps) {
       <VStack alignItems={"flex-start"}>
         <Box>
           <Grid gap={2} templateColumns={"6fr 1fr"}>
-            <Text display={"block"} as="b" noOfLines={1} fontSize="md">
-              {name}
-            </Text>
-
-            <HStack spacing={1} alignItems="center">
-              <FaStar size={12} />
-              <Text fontSize={"sm"}>{pk}</Text>
-            </HStack>
+            <Box>
+              <Image src="https://pds.saramin.co.kr/company/logo/201905/22/prw8k9_dl6f-2rxid7_logo.jpg" />
+              <Text
+                display={"block"}
+                as="b"
+                fontSize="lg"
+                textAlign={"center"}
+                mt={"5"}
+              >
+                {name}
+              </Text>
+            </Box>
           </Grid>
-          <Text fontSize={"sm"} color={gray}>
-            {}
-          </Text>
         </Box>
-        <Text fontSize={"sm"} color={gray}>
-          <Text as="b">{user}</Text> / night
-        </Text>
       </VStack>
     </Link>
   );

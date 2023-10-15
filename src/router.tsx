@@ -6,6 +6,7 @@ import KakaoConfirm from "./routes/KakaoConfirm";
 import NotFound from "./routes/NotFound";
 import CompanyDetail from "./routes/CompanyDetail";
 import UploadCompany from "./routes/UploadCompany";
+import StaffNotificat from "./routes/StaffNotificat";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
       {
         path: "companies/:companyPk/upload",
         element: <UploadCompany />,
+      },
+
+      {
+        path: "companies/:companyPk/staffs",
+        element: <StaffNotificat />,
       },
       {
         path: "social",

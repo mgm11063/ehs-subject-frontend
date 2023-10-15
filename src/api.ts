@@ -19,6 +19,7 @@ export const getCompany = ({ queryKey }: QueryFunctionContext) => {
     .then((response) => response.data);
 };
 
+
 export const getCompanyStaffs = ({ queryKey }: QueryFunctionContext) => {
   const [_, companyPk] = queryKey;
   return instance
