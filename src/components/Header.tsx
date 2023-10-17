@@ -1,3 +1,4 @@
+import { AiFillSignal } from "react-icons/ai";
 import { FaAirbnb, FaMoon, FaSun } from "react-icons/fa";
 import {
   Avatar,
@@ -83,9 +84,9 @@ export default function Header() {
       }}
       borderBottomWidth={1}
     >
-      <Box color={logoColor}>
+      <Box>
         <Link to={"/"}>
-          <FaAirbnb size={"48"} />
+          <AiFillSignal size={"48"} />
         </Link>
       </Box>
       <HStack spacing={2}>

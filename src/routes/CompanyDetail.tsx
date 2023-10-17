@@ -37,7 +37,7 @@ export default function CompanyDetail(props: any) {
   return (
     <>
       <Skeleton height={"43px"} width="25%" isLoaded={!isLoading}>
-        <Box ml={"64"} mt={"10"}>
+        <Box ml={"42"} mt={"10"}>
           <TableContainer
             rounded="2xl"
             overflowX="inherit"
@@ -54,17 +54,21 @@ export default function CompanyDetail(props: any) {
               </TableCaption>
               <Thead>
                 <Tr>
-                  <Th>성명</Th>
-                  <Th>사무직 구분</Th>
-                  <Th>야간근무</Th>
-                  <Th>일반검진 실시 여부</Th>
-                  <Th>특수검진 실시 여부</Th>
-                  <Th>SEG</Th>
-                  <Th>유해물질</Th>
-                  <Th>입사&배치일</Th>
-                  <Th>배치후&직전 검진 예정일</Th>
-                  <Th>정기 검진 예정일</Th>
-                  <Th>비고</Th>
+                  <Th fontSize={"lg"}>성명</Th>
+                  <Th fontSize={"lg"}>사무직 구분</Th>
+                  <Th fontSize={"lg"}>야간근무</Th>
+                  <Th fontSize={"lg"}>일반검진 실시 여부</Th>
+                  <Th fontSize={"lg"}>특수검진 실시 여부</Th>
+                  <Th fontSize={"lg"} textAlign={"center"}>
+                    SEG
+                  </Th>
+                  <Th fontSize={"lg"} textAlign={"center"}>
+                    유해물질
+                  </Th>
+                  <Th fontSize={"lg"}>이전&이후 기록 검진일</Th>
+                  <Th fontSize={"lg"}>배치후&직전 검진 예정일</Th>
+                  <Th fontSize={"lg"}>정기 검진 예정일</Th>
+                  <Th fontSize={"lg"}>입사&배치일</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -85,7 +89,6 @@ export default function CompanyDetail(props: any) {
                         join_date={staff.join_date}
                         staff={staff.segs}
                       />
-                      <Td></Td>
                     </Tr>
                   );
                 })}
@@ -93,7 +96,7 @@ export default function CompanyDetail(props: any) {
             </Table>
           </TableContainer>
         </Box>
-        <Box display={"flex"} justifyContent={"center"} w={"680px"}>
+        <Box display={"flex"} justifyContent={"center"} w={"310px"}>
           <Button colorScheme="teal" variant="outline">
             <Link color="teal" href="http://localhost:3000/companies/1/staffs">
               정기검진 보고서로 이동

@@ -55,7 +55,7 @@ export default function StaffNotificat() {
         Rdata
       );
       console.log("Data updated successfully:", response.data);
-      window.location.href = "/";
+      window.location.href = "http://localhost:3000/companies/1";
       return response.data;
     } catch (error) {
       console.error("Error updating data:", error);
@@ -80,9 +80,9 @@ export default function StaffNotificat() {
         <Text
           align={"center"}
           fontSize={"4xl"}
-          mb={"10"}
+          mb={"16"}
           mt={"10"}
-          fontWeight={"semibold"}
+          fontWeight={"bold"}
         >
           {currentYear}년{currentMonth}월 직원 정기검진 보고서
         </Text>
@@ -92,23 +92,29 @@ export default function StaffNotificat() {
           fontWeight={"semibold"}
           justifyContent={"center"}
           textAlign={"center"}
+          mx={"auto"}
         >
-          <Text fontSize="xl" w="32" mr={"28"}>
+          <Text fontSize="xl" w="32" mr={"32"} pl={"14"}>
             이름
           </Text>
           <Text fontSize="xl" w="32" mr={"28"}>
             공정명
           </Text>
-          <Text fontSize="xl" maxW={"52"} mr={"28"}>
+          <Text fontSize="xl" maxW={"80"} mr={"28"}>
             배치후&직전 검진 예정일
           </Text>
           <Text fontSize="xl" w={"80"}>
             배치후&직전 검진 최종 확정일
           </Text>
         </HStack>
-        <VStack spacing={4} align="stretch" mt={"5"}>
+        <VStack spacing={4} align="stretch" mt={"5"} fontWeight={"medium"}>
           {data.map((staff) => (
-            <Box key={staff.pk} display="flex" justifyContent={"center"}>
+            <Box
+              key={staff.pk}
+              display="flex"
+              justifyContent={"center"}
+              textAlign={"center"}
+            >
               <Text w={"32"} align={"center"} mr={"28"}>
                 {staff.name}
               </Text>
@@ -127,12 +133,6 @@ export default function StaffNotificat() {
                   staff={staff.segs}
                 />
               </Text>
-              <Text
-                align={"center"}
-                w={"52"}
-                mr={"28"}
-                textAlign={"center"}
-              ></Text>
               <Input
                 w={"80"}
                 {...register(`dynamicFields.${staff.pk}.pre_examination_date`)}

@@ -23,10 +23,10 @@ export default function Company({ pk, name, user }: ICompanyProps) {
 
   return (
     <Link to={`/companies/${pk}`}>
-      <VStack alignItems={"flex-start"}>
+      <VStack alignItems={"center"}>
         <Box>
           <Grid gap={2} templateColumns={"6fr 1fr"}>
-            <Box>
+            <Box border="1px" borderColor="gray.300" p={"10"} rounded="lg">
               <Image src="https://pds.saramin.co.kr/company/logo/201905/22/prw8k9_dl6f-2rxid7_logo.jpg" />
               <Text
                 display={"block"}

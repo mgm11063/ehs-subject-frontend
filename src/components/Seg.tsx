@@ -44,9 +44,13 @@ const Seg: React.FC<SegProps> = ({
         ))}
         {is_night ? <div>야간작업</div> : null}
       </Td>
-      <Td textAlign={"center"}>{in_date}</Td>
+      {/* <Td textAlign={"center"}>{pre_examination_date}</Td> */}
+      <Td textAlign={"center"}>{pre_examination_date}</Td>
       <Td textAlign={"center"}>{Oresult}</Td>
       <Td textAlign={"center"}>{Sresult}</Td>
+      <Td textAlign={"center"} color={"gray.400"}>
+        {in_date}
+      </Td>
     </>
   );
 };

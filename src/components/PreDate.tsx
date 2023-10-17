@@ -26,9 +26,7 @@ const PreDate: React.FC<SegProps> = ({ staff, pre_examination_date }) => {
   return (
     <>
       <Box>
-        {staff.factors.map((factor: IFactor, index: number) => (
-          <div key={index}>{Oresult}</div>
-        ))}
+        <div>{Oresult}</div>
       </Box>
     </>
   );
