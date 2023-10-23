@@ -7,6 +7,7 @@ import NotFound from "./routes/NotFound";
 import CompanyDetail from "./routes/CompanyDetail";
 import UploadCompany from "./routes/UploadCompany";
 import StaffNotificat from "./routes/StaffNotificat";
+import Dashbord from "./routes/Dashbord";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "companies/:companyPk/staffs",
         element: <StaffNotificat />,
+      },
+      {
+        path: "companies/:companyPk/dashbord",
+        element: <Dashbord />,
       },
       {
         path: "social",

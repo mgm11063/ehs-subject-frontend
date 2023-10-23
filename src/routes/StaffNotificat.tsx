@@ -84,7 +84,7 @@ export default function StaffNotificat() {
           mt={"10"}
           fontWeight={"bold"}
         >
-          {currentYear}년{currentMonth}월 직원 정기검진 보고서
+          {currentYear}년{currentMonth}월 검진 결과 입력
         </Text>
         <HStack
           pb={"1rem"}

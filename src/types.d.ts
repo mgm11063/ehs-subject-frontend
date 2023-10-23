@@ -35,4 +35,6 @@ export interface ISegType {
   pk: number;
   name: string;
   factors: IFactor[];
+  once_cycle_date: number;
+  regular_cycle_date: number;
 }

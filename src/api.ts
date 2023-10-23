@@ -19,6 +19,18 @@ export const getCompany = ({ queryKey }: QueryFunctionContext) => {
     .then((response) => response.data);
 };
 
+export const get35DayStaffs = ({ queryKey }: QueryFunctionContext) => {
+  const [_, companyPk] = queryKey;
+  return instance
+    .get(`companies/${companyPk}/35day`)
+    .then((response) => response.data);
+};
+export const getDashbord = ({ queryKey }: QueryFunctionContext) => {
+  const [_, companyPk] = queryKey;
+  return instance
+    .get(`companies/${companyPk}/dashbord`)
+    .then((response) => response.data);
+};
 
 export const getCompanyStaffs = ({ queryKey }: QueryFunctionContext) => {
   const [_, companyPk] = queryKey;

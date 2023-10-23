@@ -26,14 +26,6 @@ export default function CompanyDetail(props: any) {
     getCompany
   );
 
-  const fuck = "Hello from Component A";
-
-  const handleClick = () => {
-    history.push({
-      pathname: "/component-b",
-      state: { data: fuck },
-    });
-  };
   return (
     <>
       <Skeleton height={"43px"} width="25%" isLoaded={!isLoading}>
@@ -57,8 +49,8 @@ export default function CompanyDetail(props: any) {
                   <Th fontSize={"lg"}>성명</Th>
                   <Th fontSize={"lg"}>사무직 구분</Th>
                   <Th fontSize={"lg"}>야간근무</Th>
-                  <Th fontSize={"lg"}>일반검진 실시 여부</Th>
-                  <Th fontSize={"lg"}>특수검진 실시 여부</Th>
+                  <Th fontSize={"lg"}>일반검진 실시 기관</Th>
+                  <Th fontSize={"lg"}>특수검진 실시 기관</Th>
                   <Th fontSize={"lg"} textAlign={"center"}>
                     SEG
                   </Th>
@@ -99,7 +91,15 @@ export default function CompanyDetail(props: any) {
         <Box display={"flex"} justifyContent={"center"} w={"310px"}>
           <Button colorScheme="teal" variant="outline">
             <Link color="teal" href="http://localhost:3000/companies/1/staffs">
-              정기검진 보고서로 이동
+              검진 결과 입력
+            </Link>
+          </Button>
+          <Button colorScheme="teal" ml="4" variant="outline">
+            <Link
+              color="teal"
+              href="http://localhost:3000/companies/1/dashbord"
+            >
+              대쉬보드
             </Link>
           </Button>
         </Box>
