@@ -63,139 +63,159 @@ export default function Dashbord() {
           />
           <TabPanels>
             <TabPanel>검진실시현황내용들어올곳</TabPanel>
-            <TabPanel>업커밍들어올곳</TabPanel>
-            <TabPanel>사후관리들어올곳</TabPanel>
+            <TabPanel>
+              <Tabs position="relative" variant="unxstyled">
+                <TabList>
+                  <Tab>신규입사자</Tab>
+                  <Tab>기존입사자</Tab>
+                </TabList>
+                <TabIndicator
+                  mt="-1.5px"
+                  height="2px"
+                  bg="blue.500"
+                  borderRadius="1px"
+                />
+                <TabPanels>
+                  <TabPanel>
+                    <Table variant="simple">
+                      <TableCaption>
+                        Copyright 2023. EHS FRIENDS All pictures cannot be
+                        copied without permission.
+                      </TableCaption>
+                      <Thead>
+                        <Tr>
+                          <Th textAlign={"center"} fontSize={"lg"}>
+                            성명
+                          </Th>
+                          <Th textAlign={"center"} fontSize={"lg"}>
+                            공정명
+                          </Th>
+                          <Th textAlign={"center"} fontSize={"lg"}>
+                            입사&배치일
+                          </Th>
+                          <Th textAlign={"center"} fontSize={"lg"}>
+                            배치후&직전 검진 예정일
+                          </Th>
+                          <Th
+                            textAlign={"center"}
+                            fontSize={"xl"}
+                            color={"red.500"}
+                          >
+                            남은 검진 예정일
+                          </Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        {data?.map((staff: ICompanyStaff) => {
+                          const joinDateObj: Date = new Date(staff.join_date);
+                          const newDate = addMonths(
+                            joinDateObj,
+                            staff.segs.once_cycle_date
+                          );
+
+                          const newDateObj: Date = new Date(newDate);
+
+                          const resultDate = format(newDateObj, "yyyy-MM-dd");
+                          const timeDifference: number =
+                            newDateObj.getTime() - joinDateObj.getTime();
+                          const daysDifference: number =
+                            timeDifference / (1000 * 60 * 60 * 24);
+
+                          return (
+                            <Tr>
+                              <Td textAlign={"center"}>{staff.name}</Td>
+                              <Td textAlign={"center"}>{staff.segs.name}</Td>
+                              <Td textAlign={"center"}>{staff.join_date}</Td>
+                              <Td textAlign={"center"}>{resultDate}</Td>
+                              <Td textAlign={"center"} fontSize={"xl"}>
+                                {daysDifference + "일"}
+                              </Td>
+                            </Tr>
+                          );
+                        })}
+                      </Tbody>
+                    </Table>
+                  </TabPanel>
+                  <TabPanel>
+                    <Table variant="simple">
+                      <TableCaption>
+                        Copyright 2023. EHS FRIENDS All pictures cannot be
+                        copied without permission.
+                      </TableCaption>
+                      <Thead>
+                        <Tr>
+                          <Th textAlign={"center"} fontSize={"lg"}>
+                            성명
+                          </Th>
+                          <Th textAlign={"center"} fontSize={"lg"}>
+                            공정명
+                          </Th>
+                          <Th textAlign={"center"} fontSize={"lg"}>
+                            이전 검진일
+                          </Th>
+                          <Th textAlign={"center"} fontSize={"lg"}>
+                            정기 검진 예정일
+                          </Th>
+                          <Th
+                            textAlign={"center"}
+                            fontSize={"xl"}
+                            color={"red.500"}
+                          >
+                            남은 검진 예정일
+                          </Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        {data2?.map((staff: ICompanyStaff) => {
+                          const joinDateObj: Date = new Date(
+                            staff.pre_examination_date
+                          );
+                          const newDate = addMonths(
+                            joinDateObj,
+                            staff.segs.regular_cycle_date
+                          );
+
+                          const newDateObj: Date = new Date(newDate);
+
+                          const resultDate = format(newDateObj, "yyyy-MM-dd");
+                          const timeDifference: number =
+                            newDateObj.getTime() - joinDateObj.getTime();
+                          const daysDifference: number =
+                            timeDifference / (1000 * 60 * 60 * 24);
+
+                          return (
+                            <Tr>
+                              <Td textAlign={"center"}>{staff.name}</Td>
+                              <Td textAlign={"center"}>{staff.segs.name}</Td>
+                              <Td textAlign={"center"}>
+                                {staff.pre_examination_date}
+                              </Td>
+                              <Td textAlign={"center"}>{resultDate}</Td>
+                              <Td textAlign={"center"} fontSize={"xl"}>
+                                {daysDifference + "일"}
+                              </Td>
+                            </Tr>
+                          );
+                        })}
+                      </Tbody>
+                    </Table>
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </TabPanel>
+            <TabPanel>
+              {data?.map((staff: ICompanyStaff) => {
+                return (
+                  <>
+                    <Text>{staff.name}</Text>
+                    <Text>{staff}</Text>
+                  </>
+                );
+              })}
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Box>
-      <Tabs position="relative" variant="unxstyled">
-        <TabList>
-          <Tab>신규입사자</Tab>
-          <Tab>기존입사자</Tab>
-        </TabList>
-        <TabIndicator
-          mt="-1.5px"
-          height="2px"
-          bg="blue.500"
-          borderRadius="1px"
-        />
-        <TabPanels>
-          <TabPanel>
-            <Table variant="simple">
-              <TableCaption>
-                Copyright 2023. EHS FRIENDS All pictures cannot be copied
-                without permission.
-              </TableCaption>
-              <Thead>
-                <Tr>
-                  <Th textAlign={"center"} fontSize={"lg"}>
-                    성명
-                  </Th>
-                  <Th textAlign={"center"} fontSize={"lg"}>
-                    공정명
-                  </Th>
-                  <Th textAlign={"center"} fontSize={"lg"}>
-                    입사&배치일
-                  </Th>
-                  <Th textAlign={"center"} fontSize={"lg"}>
-                    배치후&직전 검진 예정일
-                  </Th>
-                  <Th textAlign={"center"} fontSize={"xl"} color={"red.500"}>
-                    남은 검진 예정일
-                  </Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {data?.map((staff: ICompanyStaff) => {
-                  const joinDateObj: Date = new Date(staff.join_date);
-                  const newDate = addMonths(
-                    joinDateObj,
-                    staff.segs.once_cycle_date
-                  );
-
-                  const newDateObj: Date = new Date(newDate);
-
-                  const resultDate = format(newDateObj, "yyyy-MM-dd");
-                  const timeDifference: number =
-                    newDateObj.getTime() - joinDateObj.getTime();
-                  const daysDifference: number =
-                    timeDifference / (1000 * 60 * 60 * 24);
-
-                  return (
-                    <Tr>
-                      <Td textAlign={"center"}>{staff.name}</Td>
-                      <Td textAlign={"center"}>{staff.segs.name}</Td>
-                      <Td textAlign={"center"}>{staff.join_date}</Td>
-                      <Td textAlign={"center"}>{resultDate}</Td>
-                      <Td textAlign={"center"} fontSize={"xl"}>
-                        {daysDifference + "일"}
-                      </Td>
-                    </Tr>
-                  );
-                })}
-              </Tbody>
-            </Table>
-          </TabPanel>
-          <TabPanel>
-            <Table variant="simple">
-              <TableCaption>
-                Copyright 2023. EHS FRIENDS All pictures cannot be copied
-                without permission.
-              </TableCaption>
-              <Thead>
-                <Tr>
-                  <Th textAlign={"center"} fontSize={"lg"}>
-                    성명
-                  </Th>
-                  <Th textAlign={"center"} fontSize={"lg"}>
-                    공정명
-                  </Th>
-                  <Th textAlign={"center"} fontSize={"lg"}>
-                    이전 검진일
-                  </Th>
-                  <Th textAlign={"center"} fontSize={"lg"}>
-                    정기 검진 예정일
-                  </Th>
-                  <Th textAlign={"center"} fontSize={"xl"} color={"red.500"}>
-                    남은 검진 예정일
-                  </Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {data2?.map((staff: ICompanyStaff) => {
-                  const joinDateObj: Date = new Date(
-                    staff.pre_examination_date
-                  );
-                  const newDate = addMonths(
-                    joinDateObj,
-                    staff.segs.regular_cycle_date
-                  );
-
-                  const newDateObj: Date = new Date(newDate);
-
-                  const resultDate = format(newDateObj, "yyyy-MM-dd");
-                  const timeDifference: number =
-                    newDateObj.getTime() - joinDateObj.getTime();
-                  const daysDifference: number =
-                    timeDifference / (1000 * 60 * 60 * 24);
-
-                  return (
-                    <Tr>
-                      <Td textAlign={"center"}>{staff.name}</Td>
-                      <Td textAlign={"center"}>{staff.segs.name}</Td>
-                      <Td textAlign={"center"}>{staff.pre_examination_date}</Td>
-                      <Td textAlign={"center"}>{resultDate}</Td>
-                      <Td textAlign={"center"} fontSize={"xl"}>
-                        {daysDifference + "일"}
-                      </Td>
-                    </Tr>
-                  );
-                })}
-              </Tbody>
-            </Table>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
     </>
   );
 }

@@ -7,6 +7,10 @@ export interface ICompanyList {
 export interface ICompany {
   staffs: ICompanyStaff[];
 }
+export interface IOpinion {
+  year_and_month: string;
+  opinion: string;
+}
 
 export interface ICompanyStaff {
   pk: number;
@@ -18,6 +22,7 @@ export interface ICompanyStaff {
   pre_examination_date: string;
   is_night: boolean;
   segs: ISegType;
+  opinions: IOpinion[];
 }
 interface FactorOption {
   value: string;
