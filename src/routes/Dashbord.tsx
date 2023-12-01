@@ -1,4 +1,9 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button,
   Heading,
@@ -18,8 +23,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
 import "../calendar.css";
-import { get35DayStaffs, getDashbord } from "../api";
-import { ICompany, ICompanyStaff, IFactor } from "../types";
+import { get35DayStaffs, getCompany, getDashbord } from "../api";
+import { ICompany, ICompanyStaff, IFactor, IOpinion } from "../types";
 import {
   Table,
   Thead,
@@ -44,7 +49,11 @@ export default function Dashbord() {
     [`companies`, companyPk],
     getDashbord
   );
-
+  const { isLoading: isLoading3, data: data3 } = useQuery<ICompany>(
+    [`all_companies`, companyPk],
+    getCompany
+  );
+  console.log(data3)
   return (
     <>
       <Box>
@@ -204,15 +213,90 @@ export default function Dashbord() {
               </Tabs>
             </TabPanel>
             <TabPanel>
-              {data?.map((staff: ICompanyStaff) => {
-                return (
-                  <>
-                    <Text>{staff.name}</Text>
-                    <Text>{staff}</Text>
-                  </>
-                );
-              })}
+              <Table variant="simple">
+                <TableCaption>
+                  Copyright 2023. EHS FRIENDS All pictures cannot be
+                  copied without permission.
+                </TableCaption>
+                <Thead>
+                  <Tr>
+                    <Th textAlign={"center"} fontSize={"lg"}>
+                      성명
+                    </Th>
+                    <Th textAlign={"center"} fontSize={"lg"}>
+                      공정명
+                    </Th>
+                    <Th textAlign={"center"} fontSize={"lg"}>
+                      의사 소견
+                    </Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {data3?.staffs.map((staff: ICompanyStaff) => (
+                    <Tr key={staff.pk}>
+                      <Td textAlign="center">{staff.name}</Td>
+                      <Td textAlign="center">{staff.segs.name}</Td>
+                      {staff.opinions && staff.opinions.length > 0 ? (
+                        staff.opinions.map((opinion: IOpinion) => (
+                          <Td textAlign="center" key={opinion.year_and_month}>
+                            {opinion.year_and_month}: {opinion.opinion}
+                          </Td>
+                        ))
+                      ) : (
+                        <Td colSpan={1} textAlign="center">
+                          의견이 없습니다
+                        </Td>
+                      )}
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+              <Accordion allowMultiple>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box as="span" flex='1' textAlign='left'>
+                        Section 1 title
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                    commodo consequat.
+                  </AccordionPanel>
+                </AccordionItem>
+
+                <AccordionItem>
+                  {({ isExpanded }) => (
+                    <>
+                      <h2>
+                        <AccordionButton>
+                          <Box as="span" flex='1' textAlign='left'>
+                            Section 2 title
+                          </Box>
+                          {isExpanded ? (
+                            <MinusIcon fontSize='12px' />
+                          ) : (
+                            <AddIcon fontSize='12px' />
+                          )}
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel pb={4}>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat.
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+              </Accordion>
             </TabPanel>
+
+
           </TabPanels>
         </Tabs>
       </Box>
